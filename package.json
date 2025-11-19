@@ -1,5 +1,5 @@
 {
-  "name": "react-native-pinch-zoom",
+  "name": "@gpbagga/react-native-pinch-zoom",
   "version": "0.1.0",
   "description": "react native library to pinch zoom at a certain point",
   "main": "./lib/module/index.js",
