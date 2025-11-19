@@ -1,2 +1,2 @@
-export { default as PinchZoomView } from './PinchZoomViewNativeComponent';
-export * from './PinchZoomViewNativeComponent';
+export { default as PinchZoomView } from './PinchZoomView';
+export * from './PinchZoomView';
