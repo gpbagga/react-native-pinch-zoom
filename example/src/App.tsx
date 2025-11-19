@@ -1,6 +1,6 @@
 import { View, StyleSheet, Image } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { PinchZoomView } from 'react-native-pinch-zoom';
+import { PinchZoomView } from '@gpbagga/react-native-pinch-zoom';
 
 export default function App() {
   return (
