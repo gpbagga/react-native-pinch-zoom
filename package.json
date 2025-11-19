@@ -132,7 +132,8 @@
     },
     "npm": {
       "publish": true,
-      "access": "public"
+      "access": "public",
+      "publishPath": "."
     },
     "github": {
       "release": true
