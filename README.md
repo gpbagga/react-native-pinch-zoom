@@ -168,6 +168,64 @@ export default function ConditionalZoom() {
 }
 ```
 
+### Modal Implementation (Android Specific)
+
+When using `PinchZoomView` inside a Modal on Android, you need to wrap the Modal content with `GestureHandlerRootView` for proper gesture handling:
+
+```jsx
+import React from 'react';
+import { View, StyleSheet, Image, FlatList, Modal } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { PinchZoomView } from 'react-native-pinch-zoom';
+
+export default function ModalExample() {
+  return (
+    <Modal visible={true} transparent={true}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <FlatList
+            style={{ width: '100%' }}
+            data={Array.from({ length: 10 }, (_, index) => index)}
+            renderItem={({ item }) => (
+              <PinchZoomView
+                minScale={1}
+                resetOn={['doubleTap', 'releaseIfScaleLessThan1']}
+              >
+                <Image
+                  source={{
+                    uri: `https://picsum.photos/400/600?random=${item}`,
+                  }}
+                  style={styles.image}
+                />
+              </PinchZoomView>
+            )}
+          />
+        </View>
+      </GestureHandlerRootView>
+    </Modal>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  },
+  image: {
+    width: 300,
+    height: 200,
+    marginVertical: 10,
+  },
+});
+```
+
+**Important Notes for Android Modals:**
+
+- Always wrap Modal content with `GestureHandlerRootView`
+- The `GestureHandlerRootView` may not be the immediate child of the Modal but must be the container of gesture enabled content
+
 ## API Reference
 
 ### Props
@@ -178,7 +236,7 @@ export default function ConditionalZoom() {
 | `minScale` | `number` | `0.25` | Minimum zoom scale |
 | `maxScale` | `number` | `20` | Maximum zoom scale |
 | `resetOn` | `ResetTrigger[]` | `[]` | Array of triggers that reset zoom to original state |
-| `activateOnlyAfterPinch` | `boolean` | `false` | If true, pan gestures are disabled until user starts pinching |
+| `activateOnlyAfterPinch` | `boolean` | `false` | If true, pan gestures are disabled until user starts pinching. **Recommended when combining with ScrollView, FlatList, or other scrollable components to prevent gesture conflicts.** |
 
 ### Reset Triggers
 
