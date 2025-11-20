@@ -1,34 +1,26 @@
 /* eslint-disable react-native/no-inline-styles */
-import { View, StyleSheet, Image, FlatList, Modal } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PinchZoomView } from '@gpbagga/react-native-pinch-zoom';
+import { Image, StyleSheet } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
   return (
-    <Modal visible={true} transparent={true}>
-      <GestureHandlerRootView>
-        <View style={styles.container}>
-          <FlatList
-            style={{ width: '100%' }}
-            data={Array.from({ length: 100 }, (_, index) => index)}
-            renderItem={() => (
-              <PinchZoomView
-                minScale={1}
-                // activateOnlyAfterPinch
-                resetOn={['doubleTap', 'releaseIfScaleLessThan1']}
-              >
-                <Image
-                  source={{
-                    uri: 'https://images.pexels.com/photos/29643306/pexels-photo-29643306.jpeg',
-                  }}
-                  style={[styles.box]}
-                />
-              </PinchZoomView>
-            )}
-          />
-        </View>
-      </GestureHandlerRootView>
-    </Modal>
+    <GestureHandlerRootView
+      style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+    >
+      <PinchZoomView
+        minScale={1}
+        // activateOnlyAfterPinch
+        resetOn={['release']}
+      >
+        <Image
+          source={{
+            uri: 'https://images.pexels.com/photos/29643306/pexels-photo-29643306.jpeg',
+          }}
+          style={[styles.box]}
+        />
+      </PinchZoomView>
+    </GestureHandlerRootView>
   );
 }
 
