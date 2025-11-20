@@ -2,7 +2,8 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-pinch-zoom": ["./src/index"]
+      "react-native-pinch-zoom": ["./src/index"],
+      "@gpbagga/react-native-pinch-zoom": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
