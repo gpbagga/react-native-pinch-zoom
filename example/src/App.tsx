@@ -11,7 +11,7 @@ export default function App() {
       <PinchZoomView
         minScale={1}
         // activateOnlyAfterPinch
-        resetOn={['release']}
+        resetOn={['doubleTap']}
       >
         <Image
           source={{
