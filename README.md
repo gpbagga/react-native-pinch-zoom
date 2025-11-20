@@ -30,6 +30,22 @@ Make sure to complete the installation of these libraries by following their res
 - [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/docs/installation)
 - [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/)
 
+### Important Setup Step
+
+**You must wrap your app with `GestureHandlerRootView`** for the gestures to work properly:
+
+```jsx
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+export default function App() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      {/* Your app content */}
+    </GestureHandlerRootView>
+  );
+}
+```
+
 ## Usage
 
 ### Basic Example
@@ -37,17 +53,20 @@ Make sure to complete the installation of these libraries by following their res
 ```jsx
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PinchZoomView } from 'react-native-pinch-zoom';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <PinchZoomView style={styles.zoomContainer}>
-        <View style={styles.content}>
-          <Text style={styles.text}>Pinch me to zoom!</Text>
-        </View>
-      </PinchZoomView>
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <PinchZoomView style={styles.zoomContainer}>
+          <View style={styles.content}>
+            <Text style={styles.text}>Pinch me to zoom!</Text>
+          </View>
+        </PinchZoomView>
+      </View>
+    </GestureHandlerRootView>
   );
 }
 
@@ -81,24 +100,27 @@ const styles = StyleSheet.create({
 ```jsx
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PinchZoomView } from 'react-native-pinch-zoom';
 
 export default function ImageZoom() {
   return (
-    <View style={styles.container}>
-      <PinchZoomView 
-        minScale={0.5}
-        maxScale={5}
-        resetOn={['doubleTap']}
-        style={styles.imageContainer}
-      >
-        <Image
-          source={{ uri: 'https://picsum.photos/400/600' }}
-          style={styles.image}
-          resizeMode="contain"
-        />
-      </PinchZoomView>
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <PinchZoomView 
+          minScale={0.5}
+          maxScale={5}
+          resetOn={['doubleTap']}
+          style={styles.imageContainer}
+        >
+          <Image
+            source={{ uri: 'https://picsum.photos/400/600' }}
+            style={styles.image}
+            resizeMode="contain"
+          />
+        </PinchZoomView>
+      </View>
+    </GestureHandlerRootView>
   );
 }
 
@@ -122,23 +144,26 @@ const styles = StyleSheet.create({
 ```jsx
 import React from 'react';
 import { ScrollView, View, Text } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PinchZoomView } from 'react-native-pinch-zoom';
 
 export default function ConditionalZoom() {
   return (
-    <ScrollView>
-      <PinchZoomView 
-        activateOnlyAfterPinch={true}
-        resetOn={['releaseIfScaleLessThan1']}
-      >
-        <View style={{ padding: 20 }}>
-          <Text>
-            This content is in a ScrollView. The zoom will only activate
-            when you start pinching, allowing normal scrolling otherwise.
-          </Text>
-        </View>
-      </PinchZoomView>
-    </ScrollView>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ScrollView>
+        <PinchZoomView 
+          activateOnlyAfterPinch={true}
+          resetOn={['releaseIfScaleLessThan1']}
+        >
+          <View style={{ padding: 20 }}>
+            <Text>
+              This content is in a ScrollView. The zoom will only activate
+              when you start pinching, allowing normal scrolling otherwise.
+            </Text>
+          </View>
+        </PinchZoomView>
+      </ScrollView>
+    </GestureHandlerRootView>
   );
 }
 ```
